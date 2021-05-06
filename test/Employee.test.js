@@ -1,13 +1,16 @@
-const NewEmployee = require('../lib/employee')
+const Employee = require('../lib/employee')
 
 describe("Employee", () => {
-    it ('Can instantiate Employee instance', () =>{
-        const obj = new NewEmployee();
-        expect()
+    // build a test to instantiate instance of Employee
+    it ('Can instantiate Employee instance', () => {
+        class Employee {};                              // creates a class of employee with body {}
+        expect(new Employee()).toBeInstanceOf(Employee);// using instance matcher we are able to test is new instance of employee was invoked by class constructor 
+    });
+    // Can set name via Constructor arguments
+    it('Can set name via class constructor arguments', () => {
+        
+    
     })
-// build a test to instantiate instance of Employee
-
-// Can set name via Constructor arguments
 
 //can set ID via Constructor argument
 
