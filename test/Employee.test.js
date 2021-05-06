@@ -8,9 +8,16 @@ describe("Employee", () => {
     });
     // Can set name via Constructor arguments
     it('Can set name via class constructor arguments', () => {
-        
-    
-    })
+        const name = "jack";                            // create a key value pair
+        const e = new Employee(name);                   // create a new key and assign to constructor function with a parr of name
+        expect(e.name).toBe(name);                      // checks if const e matches const name using jests matcher function .toBe
+    });
+
+    it('Can set ID via constructor argument', () => {
+        const email = "jwf.ritchie@gmail.com";           //replace name with email and follow steps above
+        const x = new Employee(email);
+        expect(x.email).toBe(x);
+    });
 
 //can set ID via Constructor argument
 
