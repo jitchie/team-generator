@@ -1,15 +1,17 @@
 //need inquier
-const inquirer = require('inquirer');
+const inquirer = require('./node_modules/inquirer');
 const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern') 
 
+const team = [];
+const teamMemberid = [];
+
 
 //write first series of questions
 //and put these questions into a function (engineer, intern, manager)
-let engineer = () => {
-inquirer 
-.prompt([
+let addEngineer = () => {
+inquirer .prompt([
     {
         type: "input",
         message: "what's your engineer's name?",
@@ -68,7 +70,7 @@ inquirer
 })
 };
 
-let internQuestions = () => {
+let addIntern = () => {
 
 inquirer 
 .prompt([
@@ -132,7 +134,7 @@ console.log(internResponse);
 
 
 
-let managerQuestions = () => {
+let addManager = () => {
 inquirer 
 .prompt([
     {
@@ -193,4 +195,31 @@ inquirer
 
 };
 
-module.exports = index
+function createTeam() {
+
+    inquirer.prompt([
+    {
+        type: "list",
+        name: "memberChoice",
+        message: "Which type of team member would you like to add?",
+        choices: [
+        "Engineer",
+        "Intern",
+        "I don't want to add any more team members"
+        ]
+    }
+    ]).then(userChoice => {
+    switch (userChoice.memberChoice) {
+        case "Engineer":
+        addEngineer();
+        break;
+        case "Intern":
+        addIntern();
+        break;
+        case "Manager":
+        default:
+        buildTeam();
+    }
+    });
+}
+addManager();

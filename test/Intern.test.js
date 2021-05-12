@@ -7,7 +7,7 @@ test('can set school via the constructor arguments', () => {
     const s = new Intern(null,null,null, school);
     expect(s.school).toBe(school);
 });
-//get Roll() should return "intern"
+//getRole() should return "intern"
 test("can return a string of 'Intern' using the getRole() method", () => {
     const internTest = new Intern();
     
