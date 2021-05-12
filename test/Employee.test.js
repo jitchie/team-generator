@@ -16,9 +16,9 @@ test("Can set email via constructor argument", () => {
     expect(e.email).toBe(email);
 });
 test('can set ID via constructor argument', () => {
-    const id = 86;
-    const i = new Employee(id);
-    expect(i.id).toBeInstanceOf("foo", id, email);
+    const testId = 86;
+    const e = new Employee("Foo", testId);
+    expect(e.id).toBe(testId);
 });
 
 
