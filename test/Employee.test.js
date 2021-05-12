@@ -20,6 +20,11 @@ test('can set ID via constructor argument', () => {
     const e = new Employee("Foo", testId);
     expect(e.id).toBe(testId);
 });
+test('can get name via GetName()', () => {
+    const testGetName = 'jack';
 
+    const n = 
+
+});
 
 
