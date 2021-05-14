@@ -64,6 +64,7 @@ inquirer .prompt([
 ])
 .then(engineerResponse => {
     console.log(engineerResponse);
+    createTeam();
 })
 .catch(error => {
     console.log(error);
@@ -125,6 +126,7 @@ inquirer
 ])
 .then(internResponse => {
 console.log(internResponse);
+createTeam();
 })
 .catch(error =>{
     console.log(error)
@@ -188,6 +190,7 @@ inquirer
 ])
 .then(managerResponse => {
     console.log(managerResponse);
+    createTeam();
 })
 .catch(error => {
     console.log(error)
@@ -216,10 +219,19 @@ function createTeam() {
         case "Intern":
         addIntern();
         break;
-        case "Manager":
         default:
         buildTeam();
     }
     });
 }
 addManager();
+
+
+//build team function pushes to an array team,
+//team array is then filtered into manager, engineer and intern,
+// id needs to be pushed to an array and needs validation on values within as to not double up
+
+function buildTeam() {
+    // build .push to array then filter array for cards.(maybe another function for html css)
+
+};
