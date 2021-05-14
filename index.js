@@ -63,8 +63,9 @@ inquirer .prompt([
     },
 ])
 .then(engineerResponse => {
-    console.log(engineerResponse);
+    const engineerAnswer = function(){engineerResponse};
     createTeam();
+    
 })
 .catch(error => {
     console.log(error);
@@ -125,7 +126,7 @@ inquirer
     },
 ])
 .then(internResponse => {
-console.log(internResponse);
+    const internAnswer = function(){internResponse};
 createTeam();
 })
 .catch(error =>{
@@ -189,8 +190,10 @@ inquirer
     },
 ])
 .then(managerResponse => {
-    console.log(managerResponse);
+    // console.log(managerResponse);
+    function managerAnswer(managerResponse);
     createTeam();
+    
 })
 .catch(error => {
     console.log(error)
@@ -233,5 +236,11 @@ addManager();
 
 function buildTeam() {
     // build .push to array then filter array for cards.(maybe another function for html css)
-
+    const varArr = team;
+    if (varArr.length === 0) {
+    varArr.push();
+    console.log('array =>' + varArr);
+    
+    }  
+    managerAnswer();
 };
