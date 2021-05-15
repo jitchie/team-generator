@@ -30,9 +30,11 @@ inquirer .prompt([
         message: "what is your engineer's unique ID?",
         name: "EngineerId",
         validate: async (input) => {
-            if(input.trim(' ') === '') {
+            if (input.trim(' ') === '') {
                 return 'input required'
-            } else {
+            } if (teamMemberid.indexOf(input) > -1) {
+                    return 'ID already exists'
+                } else {
                 return true;  
             }
         }
@@ -63,7 +65,7 @@ inquirer .prompt([
     },
 ])
 .then(engineerResponse => {
-    const engineerAnswer = function(){engineerResponse};
+    console.log(engineerResponse);
     createTeam();
     
 })
@@ -95,6 +97,8 @@ inquirer
         validate: async (input) =>{
             if(input.trim(' ') === '') {
                 return 'input required'
+            } if (teamMemberid.indexOf(input) > -1) {
+                return 'ID already exists'
             } else {
                 return true;  
             }
@@ -126,7 +130,8 @@ inquirer
     },
 ])
 .then(internResponse => {
-    const internAnswer = function(){internResponse};
+    team.push(internResponse);
+    console.log(JSON.stringify(team));
 createTeam();
 })
 .catch(error =>{
@@ -159,6 +164,8 @@ inquirer
         validate: async (input) =>{
             if(input.trim(' ') === '') {
                 return 'input required'
+            } if(idList.indexOf(input) > -1) {
+                return 'ID already exists'
             } else {
                 return true;  
             }
@@ -190,9 +197,14 @@ inquirer
     },
 ])
 .then(managerResponse => {
-    // console.log(managerResponse);
-    function managerAnswer(managerResponse);
+    console.log(managerResponse);
+    if (team.length === 0) {
+        team.push(managerResponse);
+    };
+    console.log('team array' + JSON.stringify(team));
+    
     createTeam();
+    
     
 })
 .catch(error => {
@@ -229,18 +241,16 @@ function createTeam() {
 }
 addManager();
 
+function teamIdValidation(){
+
+};
+
 
 //build team function pushes to an array team,
 //team array is then filtered into manager, engineer and intern,
 // id needs to be pushed to an array and needs validation on values within as to not double up
 
-function buildTeam() {
+buildTeam = () => {
     // build .push to array then filter array for cards.(maybe another function for html css)
-    const varArr = team;
-    if (varArr.length === 0) {
-    varArr.push();
-    console.log('array =>' + varArr);
     
-    }  
-    managerAnswer();
 };
