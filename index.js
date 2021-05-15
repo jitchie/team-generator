@@ -2,10 +2,8 @@
 const inquirer = require('./node_modules/inquirer');
 const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
-const Intern = require('./lib/intern');
-const htmlstring = require('./html');
-const html = htmlstring;
-const team = [];
+const renderHtml = require('./html');
+const teamArr = [];
 const teamMemberid = [];
 
 
@@ -66,7 +64,7 @@ inquirer .prompt([
     },
 ])
 .then(engineerResponse => {
-    team.push(engineerResponse);
+    teamArr.push(engineerResponse);
     
     createTeam();
     
@@ -132,7 +130,7 @@ inquirer
     },
 ])
 .then(internResponse => {
-    team.push(internResponse);
+    teamArr.push(internResponse);
     createTeam();
 })
 .catch(error =>{
@@ -198,9 +196,15 @@ inquirer
     },
 ])
 .then(managerResponse => {
-    if (team.length === 0) {
-        team.push(managerResponse);
-    };
+    
+    let manager = new Manager(managerResponse.managerName, managerResponse.ManagersId, managerResponse.managerEmail, managerResponse.managerOfficeNumber);
+        teamArr.push(manager);
+console.log(manager);
+console.log(teamArr);//repeat this for engineer and
+
+    // if (teamArr.length === 0) {
+    //     teamArr.push(managerResponse);
+    // };
     createTeam(); 
 })
 .catch(error => {
@@ -238,10 +242,9 @@ function createTeam() {
 addManager();
 
 
+
 buildTeam = () => {
-    // console.log(JSON.stringify(team,null,4));
-    console.log(html + team);// 4 to format in console
     
-    
-};
-// get function to import into that, and generate team function will map team data returns an array and join to make biog string then render.
+    renderHtml(teamArr);
+    };
+
