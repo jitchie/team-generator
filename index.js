@@ -3,6 +3,7 @@ const inquirer = require('./node_modules/inquirer');
 const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
 const renderHtml = require('./html');
+const Intern = require('./lib/intern');
 const teamArr = [];
 const teamMemberid = [];
 
@@ -64,7 +65,8 @@ inquirer .prompt([
     },
 ])
 .then(engineerResponse => {
-    teamArr.push(engineerResponse);
+    let engineer = new Engineer(engineerResponse.engineerName, engineerResponse.engineerId, engineerResponse.engineerEmail, engineerResponse.GitHub);
+        teamArr.push(engineer);
     
     createTeam();
     
@@ -130,7 +132,9 @@ inquirer
     },
 ])
 .then(internResponse => {
-    teamArr.push(internResponse);
+console.log(internResponse);
+    let intern = new Intern(internResponse.internName, internResponse.Id, internResponse.internEmail, internResponse.internSchool);
+        teamArr.push(intern);
     createTeam();
 })
 .catch(error =>{

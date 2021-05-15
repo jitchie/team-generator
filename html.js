@@ -1,11 +1,11 @@
 const generateTeam = team =>{
- console.log('team from generate'+team);  
-    let managerFromTeam = team.filter(employee => employee.getRole() === 'Manager');
-    let engineerFromTeam = team.filter(employee => employee.getRole() === 'Engineer');
-    let internFromTeam = team.filter(employee => employee.getRole() === 'Intern');
+//  console.log('team from generate'+team);  
+//     let managerFromTeam = team.filter(employee => employee.getRole() === 'Manager');
+//     let engineerFromTeam = team.filter(employee => employee.getRole() === 'Engineer');
+//     let internFromTeam = team.filter(employee => employee.getRole() === 'Intern');
 };
 module.exports = team => {
-console.log('html team'+team);
+// console.log('html team'+team);
     return `
     <!DOCTYPE html>
 <html lang="en">
