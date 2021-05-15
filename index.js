@@ -2,8 +2,9 @@
 const inquirer = require('./node_modules/inquirer');
 const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
-const Intern = require('./lib/intern') 
-
+const Intern = require('./lib/intern');
+const htmlstring = require('./html');
+const html = htmlstring;
 const team = [];
 const teamMemberid = [];
 
@@ -65,7 +66,8 @@ inquirer .prompt([
     },
 ])
 .then(engineerResponse => {
-    console.log(engineerResponse);
+    team.push(engineerResponse);
+    
     createTeam();
     
 })
@@ -131,8 +133,7 @@ inquirer
 ])
 .then(internResponse => {
     team.push(internResponse);
-    console.log(JSON.stringify(team));
-createTeam();
+    createTeam();
 })
 .catch(error =>{
     console.log(error)
@@ -164,7 +165,7 @@ inquirer
         validate: async (input) =>{
             if(input.trim(' ') === '') {
                 return 'input required'
-            } if(idList.indexOf(input) > -1) {
+            } if(teamMemberid.indexOf(input) > -1) {
                 return 'ID already exists'
             } else {
                 return true;  
@@ -197,15 +198,10 @@ inquirer
     },
 ])
 .then(managerResponse => {
-    console.log(managerResponse);
     if (team.length === 0) {
         team.push(managerResponse);
     };
-    console.log('team array' + JSON.stringify(team));
-    
-    createTeam();
-    
-    
+    createTeam(); 
 })
 .catch(error => {
     console.log(error)
@@ -241,16 +237,11 @@ function createTeam() {
 }
 addManager();
 
-function teamIdValidation(){
-
-};
-
-
-//build team function pushes to an array team,
-//team array is then filtered into manager, engineer and intern,
-// id needs to be pushed to an array and needs validation on values within as to not double up
 
 buildTeam = () => {
-    // build .push to array then filter array for cards.(maybe another function for html css)
+    // console.log(JSON.stringify(team,null,4));
+    console.log(html + team);// 4 to format in console
+    
     
 };
+// get function to import into that, and generate team function will map team data returns an array and join to make biog string then render.
