@@ -6,11 +6,11 @@ const generateTeam = teamArray =>{
     const employeeObj = teamArray[i]
 
     if ( employeeObj.getRole() === 'Manager' ) {
-    cards += generateManagerCard(employeeObj)
+    cards += generateManager(employeeObj)
     } else if (employeeObj.getRole() === 'Intern') {
-        cards += generateInternCard(employeeObj)
+        cards += generateIntern(employeeObj)
     } else (employeeObj.getRole() === 'Engineer') 
-        cards += generateEngineerCard(employeeObj)
+        cards += generateEngineer(employeeObj)
         console.log(cards);
     return cards  
     
