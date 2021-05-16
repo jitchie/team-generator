@@ -1,4 +1,3 @@
-//need inquier
 const inquirer = require('./node_modules/inquirer');
 const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
@@ -9,255 +8,243 @@ const teamMemberid = [];
 const fs = require('fs');
 const path = require('path');
 const OUTPUT_DIR = path.resolve(__dirname, "output")
-const outputPath = path.join(OUTPUT_DIR, "team.html");
+const outputPath = path.join(OUTPUT_DIR, "index.html");
 const render = require("./html.js");
-
-
 //write first series of questions
 //and put these questions into a function (engineer, intern, manager)
+function appMenu() {
 let addEngineer = () => {
 inquirer .prompt([
-    {
-        type: "input",
-        message: "what's your engineer's name?",
-        name: "eningeerName",
-        validate: async (input) => {
-            if(input.trim(' ') === '') {
-                return 'input required'
+{
+    type: "input",
+    message: "what's your engineer's name?",
+    name: "eningeerName",
+    validate: async (input) => {
+        if(input.trim(' ') === '') {
+            return 'input required'
+        } else {
+            return true;  
+        }
+}
+},
+{
+    type: "input",
+    message: "what is your engineer's unique ID?",
+    name: "EngineerId",
+    validate: async (input) => {
+        if (input.trim(' ') === '') {
+            return 'input required'
+        } if (teamMemberid.indexOf(input) > -1) {
+            return 'ID already exists'
             } else {
-                return true;  
+            return true;  
         }
     }
-
-    },
-    {
-        type: "input",
-        message: "what is your engineer's unique ID?",
-        name: "EngineerId",
-        validate: async (input) => {
-            if (input.trim(' ') === '') {
-                return 'input required'
-            } if (teamMemberid.indexOf(input) > -1) {
-                    return 'ID already exists'
-                } else {
-                return true;  
-            }
+},
+{
+    type: "input",
+    message: "what is your engineer's email?",
+    name: "EngineerEmail",
+    validate: async (input) => {
+        if(input.trim(' ') === '') {
+            return 'input required'
+        } else {
+            return true;  
         }
-    },
-    {
-        type: "input",
-        message: "what is your engineer's email?",
-        name: "EngineerEmail",
-        validate: async (input) => {
-            if(input.trim(' ') === '') {
-                return 'input required'
-            } else {
-                return true;  
-            }
+    }
+},
+{
+    type: "input",
+    message: "what is your engineer's github user name?",
+    name: "EngineerGitHub",
+    validate: async (input) => {
+        if(input.trim(' ') === '') {
+            return 'input required'
+        } else {
+            return true;  
         }
-    },
-    {
-        type: "input",
-        message: "what is your engineer's github user name?",
-        name: "EngineerGitHub",
-        validate: async (input) => {
-            if(input.trim(' ') === '') {
-                return 'input required'
-            } else {
-                return true;  
-            }
-        }
-    },
+    }
+},
 ])
 .then(engineerResponse => {
-    let engineer = new Engineer(engineerResponse.engineerName, engineerResponse.engineerId, engineerResponse.engineerEmail, engineerResponse.GitHub);
-        teamArray.push(engineer);
-    
-    createTeam();
-    
+
+let engineer = new Engineer(engineerResponse.engineerName, engineerResponse.EngineerId, engineerResponse.EngineerEmail, engineerResponse.EngineerGitHub);
+teamArray.push(engineer);
+createTeam();
 })
 .catch(error => {
-    console.log(error);
+console.log(error);
 })
 };
-
 let addIntern = () => {
-
-inquirer 
+inquirer
 .prompt([
-    {
-        type: "input",
-        message: "what is your Interns's name?",
-        name: "internName",
-        validate: async (input) =>{
-            if(input.trim(' ') === '') {
-                return 'input required'
-            } else {
-                return true;  
-            }
+{
+    type: "input",
+    message: "what is your Interns's name?",
+    name: "internName",
+    validate: async (input) =>{
+        if(input.trim(' ') === '') {
+            return 'input required'
+        } else {
+            return true;  
         }
-    },
-    {
-        type: "input",
-        message: "what is your interns's unique ID?",
-        name: "internId",
-        validate: async (input) =>{
-            if(input.trim(' ') === '') {
-                return 'input required'
-            } if (teamMemberid.indexOf(input) > -1) {
-                return 'ID already exists'
-            } else {
-                return true;  
-            }
+    }
+},
+{
+    type: "input",
+    message: "what is your interns's unique ID?",
+    name: "internId",
+    validate: async (input) =>{
+        if(input.trim(' ') === '') {
+            return 'input required'
+        } if (teamMemberid.indexOf(input) > -1) {
+            return 'ID already exists'
+        } else {
+            return true;  
         }
-    },
-    {
-        type: "input",
-        message: "what is your interns's email?",
-        name: "internEmail",
-        validate: async (input) => {
-            if(input.trim(' ') === '') {
-                return 'input required'
-            } else {
-                return true;  
-            }
+    }
+},
+{
+    type: "input",
+    message: "what is your interns's email?",
+    name: "internEmail",
+    validate: async (input) => {
+        if(input.trim(' ') === '') {
+            return 'input required'
+        } else {
+            return true;  
         }
-    },
-    {
-        type: "input",
-        message: "what is your interns's school?",
-        name: "internSchool",
-        validate: async (input) => {
-            if(input.trim(' ') === '') {
-                return 'input required'
-            } else {
-                return true;  
-            }
+    }
+},
+{
+    type: "input",
+    message: "what is your interns's school?",
+    name: "internSchool",
+    validate: async (input) => {
+        if(input.trim(' ') === '') {
+            return 'input required'
+        } else {
+            return true;  
         }
-    },
+    }
+},
 ])
 .then(internResponse => {
-console.log(internResponse);
-    let intern = new Intern(internResponse.internName, internResponse.Id, internResponse.internEmail, internResponse.internSchool);
-        teamArray.push(intern);
-    createTeam();
+let intern = new Intern(internResponse.internName, internResponse.internId, internResponse.internEmail, internResponse.internSchool);
+    teamArray.push(intern);
+    
+createTeam();
 })
 .catch(error =>{
-    console.log(error)
+
+console.log(error)
 })
 };
-
 let addManager = () => {
-inquirer 
+inquirer
 .prompt([
-    {
-        type: "input",
-        message: "what is your manager's name?",
-        name: "managerName",
-        validate: async (input) =>{
-            if(input.trim(' ') === '') {
-                return 'input required'
-            } else {
-                return true;  
-            }
+{
+    type: "input",
+    message: "what is your manager's name?",
+    name: "managerName",
+    validate: async (input) =>{
+        if(input.trim(' ') === '') {
+            return 'input required'
+        } else {
+            return true;  
         }
-    },
-    {
-        type: "input",
-        message: "what is your managers's unique ID?",
-        name: "ManagersId",
-        validate: async (input) =>{
-            if(input.trim(' ') === '') {
-                return 'input required'
-            } if(teamMemberid.indexOf(input) > -1) {
-                return 'ID already exists'
-            } else {
-                return true;  
-            }
+    }
+},
+{
+    type: "input",
+    message: "what is your managers's unique ID?",
+    name: "ManagersId",
+    validate: async (input) =>{
+        if(input.trim(' ') === '') {
+            return 'input required'
+        } if(teamMemberid.indexOf(input) > -1) {
+            return 'ID already exists'
+        } else {
+            return true;  
         }
-    },
-    {
-        type: "input",
-        message: "what is your managers's email?",
-        name: "managerEmail",
-        validate: async (input) =>{
-            if(input.trim(' ') === '') {
-                return 'input required'
-            } else {
-                return true;  
-            }
+    }
+},
+{
+    type: "input",
+    message: "what is your managers's email?",
+    name: "managerEmail",
+    validate: async (input) =>{
+        if(input.trim(' ') === '') {
+            return 'input required'
+        } else {
+            return true;  
         }
-    },
-    {
-        type: "input",
-        message: "what is your managers's office number?",
-        name: "managerOfficeNumber",
-        validate: async (input) =>{
-            if(input.trim(' ') === '') {
-                return 'input required'
-            } else {
-                return true;  
-            }
+    }
+},
+{
+    type: "input",
+    message: "what is your managers's office number?",
+    name: "managerOfficeNumber",
+    validate: async (input) =>{
+        if(input.trim(' ') === '') {
+            return 'input required'
+        } else {
+            return true;  
         }
-    },
+    }
+},
 ])
 .then(managerResponse => {
-    
-    let manager = new Manager(managerResponse.managerName, managerResponse.ManagersId, managerResponse.managerEmail, managerResponse.managerOfficeNumber);
-        teamArray.push(manager);
 
-
-    // if (teamArr.length === 0) {
-    //     teamArr.push(managerResponse);
-    // };
-    createTeam(); 
+let manager = new Manager(managerResponse.managerName, managerResponse.ManagersId, managerResponse.managerEmail, managerResponse.managerOfficeNumber);
+    teamArray.push(manager);
+createTeam();
 })
 .catch(error => {
-    console.log(error)
+console.log(error)
 })
-
 };
-
+console.log(teamArray, " team array")
 function createTeam() {
-
-    inquirer.prompt([
-    {
-        type: "list",
-        name: "memberChoice",
-        message: "Which type of team member would you like to add?",
-        choices: [
-        "Engineer",
-        "Intern",
-        "I don't want to add any more team members"
-        ]
-    }
-    ]).then(userChoice => {
-    switch (userChoice.memberChoice) {
-        case "Engineer":
-        addEngineer();
-        break;
-        case "Intern":
-        addIntern();
-        break;
-        default:
-        buildTeam();
-    }
-    });
+inquirer.prompt([
+{
+    type: "list",
+    name: "memberChoice",
+    message: "Which type of team member would you like to add?",
+    choices: [
+    "Engineer",
+    "Intern",
+    "I don't want to add any more team members"
+    ]
 }
-addManager();
+]).then(userChoice => {
+switch (userChoice.memberChoice) {
 
+    case "Engineer":
+    addEngineer();
+    break;
+    case "Intern":
+    addIntern();
+    break;
+    case "I don't want to add any more team members":
+    buildTeam();
+    break;
+    default:
+    buildTeam();
+}
+});
 
+}
+addManager()
+function buildTeam () {
 
-buildTeam = () => {
-    
-  // Create the output directory if the output path doesn't exist
+ 
 if (!fs.existsSync(OUTPUT_DIR)) {
-    fs.mkdirSync(OUTPUT_DIR)
+fs.mkdirSync(OUTPUT_DIR)
 }
 fs.writeFileSync(outputPath, render(teamArray), "utf-8");
-createManager();
+console.log('your file has been created');
 }
-
-
-
-
+}
+appMenu();
