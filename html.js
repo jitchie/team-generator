@@ -11,18 +11,26 @@ const generateTeam = teamArray =>{
     } else (employeeObj.getRole() === 'Engineer') 
         cards += generateEngineerCard(employeeObj)
     return cards  
-    }
-  //
+}
 
-
-
-const generateManagerCard = managerObj => {
-  // build and return a card based on the info in this object
-//  console.log('team from generate'+team);  
-//     let managerFromTeam = team.filter(employee => employee.getRole() === 'Manager');
-//     let engineerFromTeam = team.filter(employee => employee.getRole() === 'Engineer');
-//     let internFromTeam = team.filter(employee => employee.getRole() === 'Intern');
+const generateManagerCard = managerArray => {
+    // loop over the managerArray
+    // build and return a cards based on the info in these objects
 };
+
+const generateInternCard = internArray => {
+    // loop over the InternArray
+    // build and return a cards based on the info in these objects
+};
+
+const generateEngineerCard = engineerArray =>{
+
+};
+
+
+
+
+
 module.exports = team => {
 
     return `
