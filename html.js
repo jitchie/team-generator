@@ -14,7 +14,7 @@ const generateTeam = teamArray =>{
 }
 
 const generateManagerCard = managerArray => {
-    // loop over the managerArray
+    console.log("manager array html.js"+ managerArray);
     // build and return a cards based on the info in these objects
 };
 
