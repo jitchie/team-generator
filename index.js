@@ -4,7 +4,7 @@ const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
 const renderHtml = require('./html');
 const Intern = require('./lib/intern');
-const teamArr = [];
+const teamArray = [];
 const teamMemberid = [];
 
 
@@ -66,7 +66,7 @@ inquirer .prompt([
 ])
 .then(engineerResponse => {
     let engineer = new Engineer(engineerResponse.engineerName, engineerResponse.engineerId, engineerResponse.engineerEmail, engineerResponse.GitHub);
-        teamArr.push(engineer);
+        teamArray.push(engineer);
     
     createTeam();
     
@@ -134,16 +134,13 @@ inquirer
 .then(internResponse => {
 console.log(internResponse);
     let intern = new Intern(internResponse.internName, internResponse.Id, internResponse.internEmail, internResponse.internSchool);
-        teamArr.push(intern);
+        teamArray.push(intern);
     createTeam();
 })
 .catch(error =>{
     console.log(error)
 })
 };
-
-
-
 
 let addManager = () => {
 inquirer 
@@ -202,9 +199,9 @@ inquirer
 .then(managerResponse => {
     
     let manager = new Manager(managerResponse.managerName, managerResponse.ManagersId, managerResponse.managerEmail, managerResponse.managerOfficeNumber);
-        teamArr.push(manager);
+        teamArray.push(manager);
 console.log(manager);
-console.log(teamArr);//repeat this for engineer and
+console.log(teamArray);//repeat this for engineer and
 
     // if (teamArr.length === 0) {
     //     teamArr.push(managerResponse);
@@ -249,6 +246,6 @@ addManager();
 
 buildTeam = () => {
     
-    renderHtml(teamArr);
+    renderHtml(teamArray);
     };
 
