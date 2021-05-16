@@ -200,8 +200,7 @@ inquirer
     
     let manager = new Manager(managerResponse.managerName, managerResponse.ManagersId, managerResponse.managerEmail, managerResponse.managerOfficeNumber);
         teamArray.push(manager);
-console.log(manager);
-console.log(teamArray);//repeat this for engineer and
+
 
     // if (teamArr.length === 0) {
     //     teamArr.push(managerResponse);
@@ -247,5 +246,5 @@ addManager();
 buildTeam = () => {
     
     renderHtml(teamArray);
-    };
+};
 
