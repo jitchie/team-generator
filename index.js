@@ -6,6 +6,11 @@ const renderHtml = require('./html');
 const Intern = require('./lib/intern');
 const teamArray = [];
 const teamMemberid = [];
+const fs = require('fs');
+const path = require('path');
+const OUTPUT_DIR = path.resolve(__dirname, "output")
+const outputPath = path.join(OUTPUT_DIR, "team.html");
+const render = require("./html.js");
 
 
 //write first series of questions
@@ -245,6 +250,14 @@ addManager();
 
 buildTeam = () => {
     
-    renderHtml(teamArray);
-};
+  // Create the output directory if the output path doesn't exist
+if (!fs.existsSync(OUTPUT_DIR)) {
+    fs.mkdirSync(OUTPUT_DIR)
+}
+fs.writeFileSync(outputPath, render(teamArray), "utf-8");
+createManager();
+}
+
+
+
 

@@ -1,21 +1,5 @@
-const generateTeam = teamArray =>{
-    let cards = ''
+const generateTeam = teamArray => {
 
-  // loop over the teamArray
-  for(i=0; i  < teamArray.length;i++) {
-    const employeeObj = teamArray[i]
-
-    if ( employeeObj.getRole() === 'Manager' ) {
-    cards += generateManager(employeeObj)
-    } else if (employeeObj.getRole() === 'Intern') {
-        cards += generateIntern(employeeObj)
-    } else (employeeObj.getRole() === 'Engineer') 
-        cards += generateEngineer(employeeObj)
-        console.log(cards);
-    return cards  
-    
-}
-}
 
 const generateManager = manager => {
     return `
@@ -66,8 +50,26 @@ const generateEngineer = engineer => {
     </div>
 </div>`
 };
+const html = [];
 
+    html.push(team
+        .filter(employee => employee.getRole() === "Manager")
+        .map(manager => generateManager(manager))
+    );
+    html.push(team
+        .filter(employee => employee.getRole() === "Engineer")
+        .map(engineer => generateEngineer(engineer))
+        .join("")
+    );
+    html.push(team
+        .filter(employee => employee.getRole() === "Intern")
+        .map(intern => generateIntern(intern))
+        .join("")
+    );
 
+    return html.join("");
+
+};
 
 
 
@@ -99,7 +101,7 @@ module.exports = team => {
     <div class="container">
         <div class="row">
             <div class="team-area col-12 d-flex justify-content-center">
-            ${generateTeam(team)}
+            ${generateTeam(teamArray)}
             </div>
         </div>
     </div>
